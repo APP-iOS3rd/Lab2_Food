@@ -9,10 +9,8 @@ import Foundation
 
 class APIViewModel: ObservableObject {
     static let shared = APIViewModel()
-    
-    private init() {}
-    
-    @Published var posts:Result?
+
+    @Published var posts: Result?
     
     var apiKey: String? {
         get {
@@ -40,8 +38,7 @@ class APIViewModel: ObservableObject {
     //결과값
     func foodData(){
         guard let apiKey = apiKey else { return }
-
-        print(apiKey)
+        
          let urlString = "https://openapi.foodsafetykorea.go.kr/api/\(apiKey)/COOKRCP01/json/1/5"
 
          guard let url = URL(string: urlString) else { return }
@@ -71,12 +68,10 @@ class APIViewModel: ObservableObject {
              do {
 
                  let json = try JSONDecoder().decode(Result.self, from: data)
-                 print("1")
-                 print(json)
                  //애플리케이션이 블록 객체 형태로 작업을 제출할 수 있는 FIFO 큐
                  DispatchQueue.main.async {
                      self.posts = json
-                     
+                     print(self.posts?.cookrcp01.row)
                  }
              } catch let error {
                  print(error.localizedDescription)

@@ -16,7 +16,7 @@ struct Result: Decodable {
 }
 // 레시피 세부 정보 모델
 struct RecipeDetails: Decodable {
-    let totalCount: String
+    let total_count: String
     let row: [RecipeRow]
 }
 

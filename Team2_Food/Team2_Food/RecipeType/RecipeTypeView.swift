@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct RecipeTypeView: View {
+    @StateObject var viewModel = APIViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        }
+        .onAppear {
+            viewModel.foodData()
+        }
     }
 }
 
