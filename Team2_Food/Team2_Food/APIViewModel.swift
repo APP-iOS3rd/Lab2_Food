@@ -8,9 +8,12 @@
 import Foundation
 
 class APIViewModel: ObservableObject {
-    static let shared = APIViewModel()
-
-    @Published var posts: Result?
+    @Published var recipeList: [RecipeRow] = []
+    @Published var totalCount: Int = 0
+    @Published var startIndex: Int = 1
+    @Published var endIndex: Int = 10
+    @Published var isFinish: Bool = false
+    @Published var isHidden: Bool = false
     
     var apiKey: String? {
         get {
@@ -36,10 +39,10 @@ class APIViewModel: ObservableObject {
     
     
     //결과값
-    func foodData(){
+    func foodData(type: String){
         guard let apiKey = apiKey else { return }
         
-         let urlString = "https://openapi.foodsafetykorea.go.kr/api/\(apiKey)/COOKRCP01/json/1/5"
+         let urlString = "https://openapi.foodsafetykorea.go.kr/api/\(apiKey)/COOKRCP01/json/\(startIndex)/\(endIndex)/RCP_PAT2=\(type)"
 
          guard let url = URL(string: urlString) else { return }
 
@@ -63,15 +66,24 @@ class APIViewModel: ObservableObject {
                  return
              }
 
-//                let str = String(decoding: data, as: UTF8.self)
-//                print(str)
              do {
 
                  let json = try JSONDecoder().decode(Result.self, from: data)
                  //애플리케이션이 블록 객체 형태로 작업을 제출할 수 있는 FIFO 큐
                  DispatchQueue.main.async {
-                     self.posts = json
-                     print(self.posts!.cookrcp01.row)
+                     self.recipeList.append(contentsOf: json.cookrcp01.row)
+                     self.totalCount = Int(json.cookrcp01.total_count) ?? 0
+                     
+                     self.startIndex += 10
+                     self.endIndex += 10
+                     
+                     print(self.recipeList.count)
+                     
+                     if self.totalCount < self.startIndex {
+                         self.isFinish = true
+                     }
+                     
+                     self.isHidden = true
                  }
              } catch let error {
                  print(error.localizedDescription)

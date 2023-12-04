@@ -15,6 +15,7 @@
 		73F5E0302B1DAAEC00034F6C /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 73F5E02F2B1DAAEC00034F6C /* ApiKeys.plist */; };
 		73F5E0322B1DAB0700034F6C /* APIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F5E0312B1DAB0700034F6C /* APIViewModel.swift */; };
 		73F5E0342B1DAB2900034F6C /* APIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F5E0332B1DAB2900034F6C /* APIModel.swift */; };
+		73F5E03B2B1E0F7D00034F6C /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73F5E03A2B1E0F7D00034F6C /* RecipeDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,8 @@
 		73F5E02F2B1DAAEC00034F6C /* ApiKeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		73F5E0312B1DAB0700034F6C /* APIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIViewModel.swift; sourceTree = "<group>"; };
 		73F5E0332B1DAB2900034F6C /* APIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModel.swift; sourceTree = "<group>"; };
+		73F5E0382B1DC9D900034F6C /* Team2-Food-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Team2-Food-Info.plist"; sourceTree = SOURCE_ROOT; };
+		73F5E03A2B1E0F7D00034F6C /* RecipeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,9 +62,11 @@
 		73F5E01A2B1DA7E500034F6C /* Team2_Food */ = {
 			isa = PBXGroup;
 			children = (
+				73F5E0382B1DC9D900034F6C /* Team2-Food-Info.plist */,
 				73F5E01B2B1DA7E500034F6C /* Team2_FoodApp.swift */,
 				73F5E0292B1DAA5700034F6C /* RecipeType */,
 				73F5E02A2B1DAA7800034F6C /* RecipeInformation */,
+				73F5E0392B1E0F4A00034F6C /* RecipeDetail */,
 				73F5E0312B1DAB0700034F6C /* APIViewModel.swift */,
 				73F5E0332B1DAB2900034F6C /* APIModel.swift */,
 				73F5E01F2B1DA7E600034F6C /* Assets.xcassets */,
@@ -93,6 +98,14 @@
 				73F5E02D2B1DAAB500034F6C /* RecipeInformationView.swift */,
 			);
 			path = RecipeInformation;
+			sourceTree = "<group>";
+		};
+		73F5E0392B1E0F4A00034F6C /* RecipeDetail */ = {
+			isa = PBXGroup;
+			children = (
+				73F5E03A2B1E0F7D00034F6C /* RecipeDetailView.swift */,
+			);
+			path = RecipeDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -167,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				73F5E02E2B1DAAB500034F6C /* RecipeInformationView.swift in Sources */,
+				73F5E03B2B1E0F7D00034F6C /* RecipeDetailView.swift in Sources */,
 				73F5E02C2B1DAAA300034F6C /* RecipeTypeView.swift in Sources */,
 				73F5E01C2B1DA7E500034F6C /* Team2_FoodApp.swift in Sources */,
 				73F5E0322B1DAB0700034F6C /* APIViewModel.swift in Sources */,
@@ -306,6 +320,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Team2_Food/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Team2-Food-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -334,6 +349,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Team2_Food/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Team2-Food-Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

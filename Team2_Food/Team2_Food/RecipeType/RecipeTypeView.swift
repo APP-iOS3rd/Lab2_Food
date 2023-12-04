@@ -7,36 +7,60 @@
 
 import SwiftUI
 
+struct Recipe: Identifiable {
+    let id = UUID()
+    let image: String
+    let title: String
+}
+
 struct RecipeTypeView: View {
-
-      @StateObject var viewModel = APIViewModel()
-
-    let recipeTypes: [String] = ["국", "반찬", "밥", "찌개", "후식"]
+    let recipeTypes: [Recipe] = [
+        .init(image: "soup", title: "국"),
+        .init(image: "sideDish", title: "반찬"),
+        .init(image: "rice", title: "밥"),
+        .init(image: "course", title: "일품"),
+        .init(image: "dessert", title: "후식")
+    ]
+    
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    ForEach(recipeTypes, id: \.self) { type in
+                Text("Category")
+                    .font(.largeTitle)
+                    .bold()
+                
+                ScrollView {
+                    ForEach(recipeTypes) { type in
                         Button {
-                            // API 호출
-                            // 예시 url http://openapi.foodsafetykorea.go.kr/api/acc5b06c942c4a94b3a1/COOKRCP01/json/1/15/RCP_PAT2=\(type)
+                           
                         } label: {
-                            VStack {
-                                Image(type)
-                                    .resizable()
-                                    .scaledToFit()
-                                Text(type)
+                            HStack {
+                                Spacer()
+                                
+                                NavigationLink {
+                                    RecipeInformationView(recipeType: type.title)
+                                } label: {
+                                    VStack {
+                                        Image(type.image)
+                                        
+                                            .resizable()
+                                            .aspectRatio(contentMode: .fit)
+                                            .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/2)
+                                            .padding()
+                                        
+                                        Text(type.title)
+                                            .font(.system(size: 30))
+                                            .foregroundStyle(.black)
+                                    }
+                                }
+                                Spacer()
                             }
                         }
                     }
                 }
-                Spacer()
-            }
-            .onAppear {
-            viewModel.foodData()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .padding()
-            .navigationTitle("레시피 종류")
         }
     }
 }

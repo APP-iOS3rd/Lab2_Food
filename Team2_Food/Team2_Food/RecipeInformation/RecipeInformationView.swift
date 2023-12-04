@@ -8,68 +8,87 @@
 import SwiftUI
 
 struct RecipeInformationView: View {
+    @Environment(\.dismiss) private var dismiss
     
-    private let samples: [APIModel] = [
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00028_2.png", title: "새우두부계란찜"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00031_2.png", title: "방울토마토 소박이"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
-        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침")
+    @StateObject var viewModel = APIViewModel()
     
-    ]
+    var recipeType: String?
     
     var body: some View {
-        HStack {
-            Button {
+        ZStack {
+            HStack {
+                Button {
+                    dismiss()
+                } label: {
+                    Text("<")
+                        .font(.largeTitle)
+                        .foregroundStyle(.black)
+                }
+                .padding()
                 
-            } label: {
-                Text("<")
-                    .font(.largeTitle)
-                    .foregroundStyle(.black)
+                Spacer()
             }
-            .padding(.horizontal)
-
-            Spacer()
-            Text("Samples.Type")
+            
+            Text(recipeType ?? "")
                 .font(.largeTitle)
                 .bold()
-            
-            Spacer()
-            Spacer()
+                .padding()
         }
         
-        ScrollView {
-            ForEach(samples, id: \.self) { sample in
-                HStack {
-                    AsyncImage(url: URL(string: sample.image)!) {
-                        image in
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .cornerRadius(12.0)
-                            .frame(width: 80, height: 80)
-                    } placeholder: {
-                        ProgressView()
-                            .frame(width: 80, height: 80)
+        VStack {
+            ScrollView {
+                LazyVStack {
+                    ForEach($viewModel.recipeList) { recipe in
+                        NavigationLink {
+                            RecipeDetailView(recipe: recipe.wrappedValue)
+                        } label: {
+                            HStack {
+                                AsyncImage(url: URL(string: recipe.smollImage.wrappedValue)) {
+                                    image in
+                                    image
+                                        .resizable()
+                                        .cornerRadius(12.0)
+                                        .frame(width: 80, height: 80)
+                                } placeholder: {
+                                    ProgressView()
+                                        .frame(width: 80, height: 80)
+                                }
+                                
+                                Text(recipe.rcpName.wrappedValue)
+                                    .multilineTextAlignment(.leading)
+                                    .font(.system(size: 25))
+                                    .foregroundStyle(.black)
+                                
+                                Spacer()
+                            }
+                            .padding(.leading, 20)
+                        }
                     }
                     
-                    Text(sample.title)
-                        .font(.system(size: 25))
+                    if !viewModel.isFinish {
+                        ProgressView()
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                                    viewModel.foodData(type: recipeType ?? "")
+                                }
+                            }
+                    }
                     
-                    Spacer()
                 }
-                .padding(.leading, 20)
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationBarBackButtonHidden()
+    }
+}
+
+extension View {
+    @ViewBuilder func isHidden(_ isHidden: Bool) -> some View {
+        if isHidden {
+            self.hidden()
+        } else {
+            self
+        }
     }
 }
 
