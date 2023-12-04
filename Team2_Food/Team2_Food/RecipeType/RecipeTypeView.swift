@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct RecipeTypeView: View {
-<<<<<<< Updated upstream
+    
     @StateObject var viewModel = APIViewModel()
     
     var body: some View {
@@ -18,17 +18,6 @@ struct RecipeTypeView: View {
         .onAppear {
             viewModel.foodData()
         }
-=======
-    @StateObject var foodAPI = APIViewModel.shared
-    var body: some View {
-        
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            .onAppear(){
-                
-                foodAPI.foodData()
-                
-            }
->>>>>>> Stashed changes
     }
 }
 

@@ -63,24 +63,15 @@ class APIViewModel: ObservableObject {
                  return
              }
 
-                let str = String(decoding: data, as: UTF8.self)
-                print(str)
+//                let str = String(decoding: data, as: UTF8.self)
+//                print(str)
              do {
 
                  let json = try JSONDecoder().decode(Result.self, from: data)
-<<<<<<< Updated upstream
                  //애플리케이션이 블록 객체 형태로 작업을 제출할 수 있는 FIFO 큐
                  DispatchQueue.main.async {
                      self.posts = json
-                     print(self.posts?.cookrcp01.row)
-=======
-                 print("1111111111111111111111")
-                 print(json)
-                 //애플리케이션이 블록 객체 형태로 작업을 제출할 수 있는 FIFO 큐
-                 DispatchQueue.main.async {
-                     self.posts = json
-                     dump(self.posts)
->>>>>>> Stashed changes
+                     print(self.posts!.cookrcp01.row)
                  }
              } catch let error {
                  print(error.localizedDescription)
