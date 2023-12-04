@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct RecipeTypeView: View {
+
+      @StateObject var viewModel = APIViewModel()
+
     let recipeTypes: [String] = ["국", "반찬", "밥", "찌개", "후식"]
     var body: some View {
         NavigationView {
@@ -28,6 +31,9 @@ struct RecipeTypeView: View {
                     }
                 }
                 Spacer()
+            }
+            .onAppear {
+            viewModel.foodData()
             }
             .padding()
             .navigationTitle("레시피 종류")
