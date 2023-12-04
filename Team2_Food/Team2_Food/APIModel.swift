@@ -7,6 +7,24 @@
 
 import Foundation
 
-struct APIModel {
+struct Result: Decodable {
+    let cookrcp01: RecipeDetails
     
+    enum CodingKeys: String, CodingKey {
+        case cookrcp01 = "COOKRCP01"
+    }
+}
+// 레시피 세부 정보 모델
+struct RecipeDetails: Decodable {
+    let totalCount: String
+    let row: [RecipeRow]
+}
+
+// 레시피 한 행 모델
+struct RecipeRow: Decodable {
+    let RCP_SEQ: String
+    let RCP_NM: String
+    let RCP_WAY2: String
+    let RCP_PAT2: String
+    let INFO_WGT: String
 }
