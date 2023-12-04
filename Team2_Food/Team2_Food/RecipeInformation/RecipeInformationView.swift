@@ -5,11 +5,79 @@
 //  Created by 노주영 on 2023/12/04.
 //
 
+/*
+ 1    RCP_SEQ    일련번호
+ 2    RCP_NM    메뉴명
+ 3    RCP_WAY2    조리방법
+ 4    RCP_PAT2    요리종류
+ 12    ATT_FILE_NO_MAIN    이미지경로(소)
+ */
+
 import SwiftUI
 
 struct RecipeInformationView: View {
+    
+    private let samples: [APIModel] = [
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00028_2.png", title: "새우두부계란찜"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00031_2.png", title: "방울토마토 소박이"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침"),
+        .init(image: "http://www.foodsafetykorea.go.kr/uploadimg/cook/10_00032_2.png", title: "오이무침")
+    
+    ]
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack {
+            Button {
+                
+            } label: {
+                Text("<")
+                    .font(.largeTitle)
+                    .foregroundStyle(.black)
+            }
+            .padding(.horizontal)
+
+            Spacer()
+            Text("Samples.Type")
+                .font(.largeTitle)
+                .bold()
+            
+            Spacer()
+            Spacer()
+        }
+        
+        ScrollView {
+            ForEach(samples, id: \.self) { sample in
+                HStack {
+                    AsyncImage(url: URL(string: sample.image)!) {
+                        image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(12.0)
+                            .frame(width: 80, height: 80)
+                    } placeholder: {
+                        ProgressView()
+                            .frame(width: 80, height: 80)
+                    }
+                    
+                    Text(sample.title)
+                        .font(.system(size: 25))
+                    
+                    Spacer()
+                }
+                .padding(.leading, 20)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

@@ -7,6 +7,7 @@
 
 import Foundation
 
-struct APIModel {
-    
+struct APIModel: Hashable {
+    var image: String
+    var title: String
 }
