@@ -8,15 +8,35 @@
 import SwiftUI
 
 struct RecipeTypeView: View {
-    
-    @StateObject var viewModel = APIViewModel()
-    
+
+      @StateObject var viewModel = APIViewModel()
+
+    let recipeTypes: [String] = ["국", "반찬", "밥", "찌개", "후식"]
     var body: some View {
-        VStack {
-            Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-        }
-        .onAppear {
+        NavigationView {
+            VStack {
+                HStack {
+                    ForEach(recipeTypes, id: \.self) { type in
+                        Button {
+                            // API 호출
+                            // 예시 url http://openapi.foodsafetykorea.go.kr/api/acc5b06c942c4a94b3a1/COOKRCP01/json/1/15/RCP_PAT2=\(type)
+                        } label: {
+                            VStack {
+                                Image(type)
+                                    .resizable()
+                                    .scaledToFit()
+                                Text(type)
+                            }
+                        }
+                    }
+                }
+                Spacer()
+            }
+            .onAppear {
             viewModel.foodData()
+            }
+            .padding()
+            .navigationTitle("레시피 종류")
         }
     }
 }
