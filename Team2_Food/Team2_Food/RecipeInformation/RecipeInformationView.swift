@@ -30,7 +30,7 @@ struct RecipeInformationView: View {
             }
             
             Text(recipeType ?? "")
-                .font(.largeTitle)
+                .font(.title)
                 .bold()
                 .padding()
         }

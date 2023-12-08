@@ -21,50 +21,58 @@ struct RecipeTypeView: View {
         .init(image: "course", title: "일품"),
         .init(image: "dessert", title: "후식")
     ]
+    private var gridItems = [GridItem(),GridItem(),GridItem()]
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Category")
-                    .font(.largeTitle)
+            ScrollView {
+                Spacer()
+                Text("레시피 분류")
+                    .font(.title)
                     .bold()
+                Divider()
+
                 
-                ScrollView {
+                LazyVGrid(columns: gridItems,alignment: .center){
                     ForEach(recipeTypes) { type in
-                        Button {
-                           
+                        NavigationLink {
+                            RecipeInformationView(recipeType: type.title)
                         } label: {
-                            HStack {
-                                Spacer()
-                                
-                                NavigationLink {
-                                    RecipeInformationView(recipeType: type.title)
-                                } label: {
-                                    VStack {
-                                        Image(type.image)
-                                        
-                                            .resizable()
-                                            .aspectRatio(contentMode: .fit)
-                                            .frame(width: UIScreen.main.bounds.width/2, height: UIScreen.main.bounds.width/2)
-                                            .padding()
-                                        
-                                        Text(type.title)
-                                            .font(.system(size: 30))
-                                            .foregroundStyle(.black)
-                                    }
-                                }
-                                Spacer()
-                            }
+                            CellContent(image: type.image, title: type.title)
                         }
                     }
+                    
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
-            .padding()
+            Spacer()
+            
         }
     }
 }
 
+
 #Preview {
     RecipeTypeView()
+}
+
+struct CellContent: View{
+    
+    var image: String
+    var title: String
+    
+    var body: some View{
+        VStack(spacing: -10){
+            Image(image)
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: UIScreen.main.bounds.width/6, height: UIScreen.main.bounds.width/6)
+                .padding()
+            
+            Text(title)
+                .font(.system(size: 17))
+                .foregroundStyle(.black)
+                .bold()
+        }
+        
+    }
 }
