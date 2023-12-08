@@ -43,6 +43,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5CC873F02B22CFEC00D6497D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				73F5E0312B1DAB0700034F6C /* APIViewModel.swift */,
+				73F5E0332B1DAB2900034F6C /* APIModel.swift */,
+				7316C3182B1E2A46004E3ECB /* ApiKeys.plist */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		73F5E00F2B1DA7E500034F6C = {
 			isa = PBXGroup;
 			children = (
@@ -67,9 +77,7 @@
 				73F5E0292B1DAA5700034F6C /* RecipeType */,
 				73F5E02A2B1DAA7800034F6C /* RecipeInformation */,
 				73F5E0392B1E0F4A00034F6C /* RecipeDetail */,
-				73F5E0312B1DAB0700034F6C /* APIViewModel.swift */,
-				73F5E0332B1DAB2900034F6C /* APIModel.swift */,
-				7316C3182B1E2A46004E3ECB /* ApiKeys.plist */,
+				5CC873F02B22CFEC00D6497D /* Model */,
 				73F5E01F2B1DA7E600034F6C /* Assets.xcassets */,
 				73F5E0212B1DA7E600034F6C /* Preview Content */,
 			);
